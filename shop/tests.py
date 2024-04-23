@@ -68,7 +68,8 @@ class ProductViewTest(TestCase):
 class ProductDetailViewTest(TestCase):
     def test_get_product_by_slug(self):
         """
-        Test case for the `get_product_by_slug` method of the `ProductDetailViewTest` class.
+        Test case for the `get_product_by_slug` method of the
+        `ProductDetailViewTest` class.
 
         This test verifies that the `get_product_by_slug` 
         method correctly retrieves and displays a product on 
@@ -112,6 +113,10 @@ class ProductDetailViewTest(TestCase):
 
 class CategoryListViewTest(TestCase):
     def setUp(self):
+        """
+        Set up the test environment by creating a test category 
+        and a test product.
+        """
         small_gif = (
         b'\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x00\x00\x00\x21\xf9\x04'
         b'\x01\x0a\x00\x01\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02'
@@ -129,16 +134,28 @@ class CategoryListViewTest(TestCase):
             slug="test-product")
         
     def test_status_code(self):
+        """
+        Test the status code of the response returned 
+        by the `category_list` view.
+        """
         response = self.client.get(
             reverse("shop:category_list", args=[self.category.slug]))
         self.assertEqual(response.status_code, 200)
 
     def test_template_used(self):
+        """
+        A description of the entire function, 
+        its parameters, and its return types.
+        """
         responce = self.client.get(
             reverse("shop:category_list", args=[self.category.slug]))
         self.assertTemplateUsed(responce, "shop/category_list.html")
 
     def test_context_data(self):
+        """
+        Test the context data of the response returned 
+        by the `category_list` view.
+        """
         response = self.client.get(
             reverse("shop:category_list", args=[self.category.slug]))
         self.assertEqual(response.context["category"], self.category)
